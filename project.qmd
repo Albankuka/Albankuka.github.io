@@ -28,7 +28,7 @@ library(tidyverse)
 library(skimr)
 library(ggthemes)
 library(hrbrthemes)
-
+earthquake <- read.csv('/Users/alban/Downloads/earthquake data.csv')
 theme_set(theme_ipsum()+
           theme(strip.background =element_rect(fill="lightgray"),
                 axis.title.x = 
@@ -68,7 +68,7 @@ mpg <- ggplot2::mpg
 ```{r}
 #| results: asis
 #| echo: false
-rmarkdown::paged_table(mpg) 
+rmarkdown::paged_table(earthquake) 
 ```
 
 
