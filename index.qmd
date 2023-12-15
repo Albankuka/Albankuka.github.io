@@ -1,5 +1,5 @@
 ---
-title: "YOUR NAME"
+title: "Alban Kuka"
 about:
   template: trestles  # jolla  trestles  solana  marquee  broadside
   image: img/profile.png
@@ -36,6 +36,6 @@ Minor in Business Administration
 
 ## Experience
 
-Starbucks Analytics | Data Analyst Intern | May 2024 - Aug 2024
+| Data Analyst Intern | May 2024 - Aug 2024
 
 
