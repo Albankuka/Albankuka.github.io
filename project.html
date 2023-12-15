@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Name 1">
-<meta name="author" content="Name 2">
-<meta name="author" content="Name 3">
-<meta name="author" content="Name 4">
-<meta name="author" content="Name 5">
+<meta name="author" content="Alban Kuka">
+<meta name="author" content="Henry Socash">
+<meta name="author" content="Victoria Pavlock">
+<meta name="author" content="Jeremy Sun">
+<meta name="author" content="Jackson Boyer">
 
 <title>Alban Kuka - DANL Project</title>
 <style>
@@ -173,11 +173,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
-             <p>Name 1 </p>
-             <p>Name 2 </p>
-             <p>Name 3 </p>
-             <p>Name 4 </p>
-             <p>Name 5 </p>
+             <p>Alban Kuka </p>
+             <p>Henry Socash </p>
+             <p>Victoria Pavlock </p>
+             <p>Jeremy Sun </p>
+             <p>Jackson Boyer </p>
           </div>
   </div>
     
@@ -192,10 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>About this project <span class="emoji" data-emoji="clap">👏</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>earthquake <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'/Users/alban/Downloads/earthquake data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data" class="level1" data-number="2">
@@ -204,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="summary-statistics" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">2.1</span> Summary Statistics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span>mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>earthquake <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'/Users/alban/Downloads/earthquake data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output-display">
 
@@ -215,23 +212,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(mpg) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n_missing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>earthquake1 <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> <span class="fu">select</span>(Magnitude,Depth)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(earthquake1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Name</td>
-<td style="text-align: left;">mpg</td>
+<td style="text-align: left;">earthquake1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">234</td>
+<td style="text-align: left;">53539</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">11</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">_______________________</td>
@@ -242,90 +239,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">6</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">5</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">________________________</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Group variables</td>
 <td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: character</strong></p>
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">min</th>
-<th style="text-align: right;">max</th>
-<th style="text-align: right;">empty</th>
-<th style="text-align: right;">n_unique</th>
-<th style="text-align: right;">whitespace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">manufacturer</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">model</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">trans</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">drv</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fl</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">class</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
@@ -333,19 +256,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="table table-sm table-striped small">
 <colgroup>
 <col style="width: 17%">
+<col style="width: 12%">
 <col style="width: 17%">
-<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 7%">
 <col style="width: 6%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
+<col style="width: 4%">
 <col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
 <col style="width: 7%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
 <th style="text-align: right;">complete_rate</th>
 <th style="text-align: right;">mean</th>
 <th style="text-align: right;">sd</th>
@@ -359,64 +284,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">displ</td>
+<td style="text-align: left;">Magnitude</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">3.47</td>
-<td style="text-align: right;">1.29</td>
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">2.4</td>
-<td style="text-align: right;">3.3</td>
-<td style="text-align: right;">4.6</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">▇▆▆▃▁</td>
+<td style="text-align: right;">2.96</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">-0.7</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">2.9</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">7.7</td>
+<td style="text-align: left;">▁▆▇▁▁</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">year</td>
+<td style="text-align: left;">Depth</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">2003.50</td>
-<td style="text-align: right;">4.51</td>
-<td style="text-align: right;">1999.0</td>
-<td style="text-align: right;">1999.0</td>
-<td style="text-align: right;">2003.5</td>
-<td style="text-align: right;">2008.0</td>
-<td style="text-align: right;">2008</td>
-<td style="text-align: left;">▇▁▁▁▇</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">cyl</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5.89</td>
-<td style="text-align: right;">1.61</td>
-<td style="text-align: right;">4.0</td>
-<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">35.80</td>
+<td style="text-align: right;">67.58</td>
+<td style="text-align: right;">-4.0</td>
 <td style="text-align: right;">6.0</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">▇▁▇▁▇</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">cty</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">16.86</td>
-<td style="text-align: right;">4.26</td>
-<td style="text-align: right;">9.0</td>
-<td style="text-align: right;">14.0</td>
-<td style="text-align: right;">17.0</td>
-<td style="text-align: right;">19.0</td>
-<td style="text-align: right;">35</td>
-<td style="text-align: left;">▆▇▃▁▁</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">hwy</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">23.44</td>
-<td style="text-align: right;">5.95</td>
-<td style="text-align: right;">12.0</td>
-<td style="text-align: right;">18.0</td>
-<td style="text-align: right;">24.0</td>
-<td style="text-align: right;">27.0</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: left;">▅▅▇▁▁</td>
+<td style="text-align: right;">10.0</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">750.0</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 </tbody>
 </table>
@@ -427,10 +318,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.2" class="anchored" data-anchor-id="mpg-and-a-type-of-cars"><span class="header-section-number">2.2</span> MPG and a Type of Cars</h2>
 <p>The following boxplot shows how the distribution of highway MPG (<code>hwy</code>) varies by a type of cars (<code>class</code>) <span class="emoji" data-emoji="blue_car">🚙</span> <span class="emoji" data-emoji="truck">🚚</span> <span class="emoji" data-emoji="minibus">🚐</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Class"</span>, <span class="at">y =</span> <span class="st">"Highway</span><span class="sc">\n</span><span class="st">MPG"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Class"</span>, <span class="at">y =</span> <span class="st">"Highway</span><span class="sc">\n</span><span class="st">MPG"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="project_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="864"></p>
 </div>
