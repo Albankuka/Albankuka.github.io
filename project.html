@@ -156,7 +156,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2</span> Summary Statistics</a>
   <ul class="collapse">
-  <li><a href="#mpg-and-a-type-of-cars" id="toc-mpg-and-a-type-of-cars" class="nav-link" data-scroll-target="#mpg-and-a-type-of-cars"><span class="header-section-number">2.1</span> MPG and a Type of Cars</a></li>
+  <li><a href="#magnitude-statistics" id="toc-magnitude-statistics" class="nav-link" data-scroll-target="#magnitude-statistics"><span class="header-section-number">2.1</span> Magnitude Statistics</a></li>
+  <li><a href="#mpg-and-a-type-of-cars" id="toc-mpg-and-a-type-of-cars" class="nav-link" data-scroll-target="#mpg-and-a-type-of-cars"><span class="header-section-number">2.2</span> MPG and a Type of Cars</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -224,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="summary-statistics" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Summary Statistics</h1>
-<p>Using the skim function we can get simple summary statistics for the variables: <code>Magnitude</code> and <code>Depth</code> The information such as mean and standard deviation would be for the worldwide data</p>
+<p>Using the skim function we can get simple summary statistics for the variables: <code>Magnitude</code> and <code>Depth</code> The information such as mean and standard deviation would be for the worldwide data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>earthquake1 <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> <span class="fu">select</span>(Magnitude,Depth)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(earthquake1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -335,20 +336,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 </div>
 </div>
-<section id="mpg-and-a-type-of-cars" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="mpg-and-a-type-of-cars"><span class="header-section-number">2.1</span> MPG and a Type of Cars</h2>
+<section id="magnitude-statistics" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="magnitude-statistics"><span class="header-section-number">2.1</span> Magnitude Statistics</h2>
+<p>For a more detailed summary for <code>Magnitude</code> I transformed the data to return all summary statistics for only magnitude. This will allow us to see worldwide averages of the severity of earthquakes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>summagnitude <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_magnitude =</span> <span class="fu">mean</span>(Magnitude, <span class="at">na.rm =</span> T), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_magnitude =</span> <span class="fu">sd</span>(Magnitude),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">q1_magnitude =</span> <span class="fu">quantile</span>(Magnitude, <span class="at">probs =</span> .<span class="dv">25</span>, <span class="at">na.rm =</span> T),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_magnitude =</span> <span class="fu">median</span>(Magnitude),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">q3_magnitude =</span> <span class="fu">quantile</span>(Magnitude, <span class="at">probs =</span> .<span class="dv">75</span>, <span class="at">na.rm =</span>  T),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_magnitude =</span> <span class="fu">min</span>(Magnitude, <span class="at">na.rm =</span> T),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_magnitude =</span> <span class="fu">max</span>(Magnitude, <span class="at">na.rm =</span> T)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["mean_magnitude"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sd_magnitude"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["q1_magnitude"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["median_magnitude"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["q3_magnitude"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["min_magnitude"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["max_magnitude"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"2.962569","2":"0.8939105","3":"2.3","4":"2.9","5":"3.5","6":"-0.7","7":"7.7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</section>
+<section id="mpg-and-a-type-of-cars" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="mpg-and-a-type-of-cars"><span class="header-section-number">2.2</span> MPG and a Type of Cars</h2>
 <p>The following boxplot shows how the distribution of highway MPG (<code>hwy</code>) varies by a type of cars (<code>class</code>) <span class="emoji" data-emoji="blue_car">🚙</span> <span class="emoji" data-emoji="truck">🚚</span> <span class="emoji" data-emoji="minibus">🚐</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Class"</span>, <span class="at">y =</span> <span class="st">"Highway</span><span class="sc">\n</span><span class="st">MPG"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy, <span class="at">fill =</span> class),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Class"</span>, <span class="at">y =</span> <span class="st">"Highway</span><span class="sc">\n</span><span class="st">MPG"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="project_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="864"></p>
+<p><img src="project_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="864"></p>
 </div>
 </div>
-<section id="people" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="people"><span class="header-section-number">2.1.1</span> people</h3>
+<section id="people" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="people"><span class="header-section-number">2.2.1</span> people</h3>
 
 
 </section>
