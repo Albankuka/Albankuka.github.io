@@ -118,20 +118,24 @@ rmarkdown::paged_table(summagnitude)
 ```
 
 
-## MPG and a Type of Cars
-The following boxplot shows how the distribution of highway MPG (`hwy`) varies by a type of cars (`class`) :blue_car: :truck: :minibus:.
+# Frequency Data 
+The following freqpoly and histograms show how the frequency/occurrences of (`Magnitude`) varies by the (`Depth`) of the earthquake. We can determine the correlation between these two variables to find relationships on the strengths of earthquakes.
+
+```{r}
+ggplot(earthquake, aes(x = Magnitude)) +
+  geom_freqpoly(bins = 100)
+```
+
+From this freqpoly we can see that the level 2 magnitude earthquakes seem to be the most common with almost 4000 occurrences worldwide. the density of this plot shows us that between level 2 and 6, majority of earthquakes rumble at these magnitudes.
 
 
 ```{r}
-ggplot(data = mpg) +
-  geom_boxplot(aes(x = class, y = hwy, fill = class),
-               show.legend = F) +
-  labs(x = "Class", y = "Highway\nMPG") 
+ggplot(earthquake, aes(x = log(Depth))) +
+  geom_histogram(bins = 50)
 ```
 
-### people 
-```{r}
+From this histogram we can see that the depth of around 2.3 kilometers was the depth that occurred the most with a frequency of 8000 so mainly earthquakes in general have a depth of 1.7 to 2.3 kilometers.
 
-```
+
 
 
