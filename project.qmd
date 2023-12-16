@@ -79,20 +79,17 @@ rmarkdown::paged_table(earthquake)
 
 # Summary Statistics
 
+Using the skim function we can get simple summary statistics for the variables: `Magnitude` and `Depth` The information such as mean and standard deviation would be for the worldwide data
+
 ```{r}
-earthquake <- read.csv('/Users/alban/Downloads/earthquake data.csv')
+earthquake1 <- earthquake %>% select(Magnitude,Depth)
+skim(earthquake1)
 ```
 
 ```{r}
 #| results: asis
 #| echo: false
 rmarkdown::paged_table(earthquake) 
-```
-
-
-```{r}
-earthquake1 <- earthquake %>% select(Magnitude,Depth)
-skim(earthquake1)
 ```
 
 
