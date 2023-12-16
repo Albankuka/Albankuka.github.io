@@ -58,12 +58,23 @@ earthquake <- read.csv('/Users/alban/Downloads/earthquake data.csv')
 Analyzing this data will help us determine the countries across the world that encounter the most devastating earthquakes. This can help and raise awareness for natural disasters in these countries and contribute to safety protocols for when earthquakes occur. The more we can prove a country is suffering because of natural disasters the more we can advocate for advanced infrastructure designed for safety during these occurrences. 
 
 
-### Data
+## The Author: Syed Anwar
+
+The author of this earthquake data is Syed Anwar, titled:  "Earthquake Events Worldwide 2023" Syed explains the parameters of his data by saying, “With a total of 53,540 data points, this dataset offers a valuable resource for researchers, geologists, and data enthusiasts to explore and analyze seismic trends, patterns, and distributions across the globe.” 
+
+
+## Data
 
 In the data `earthquake` that we have sourced from Kaggle, which can be found at: [https://www.kaggle.com/datasets/syedanwarafridi/earthquake-events-worldwide-2023?rvi=1](https://www.kaggle.com/datasets/syedanwarafridi/earthquake-events-worldwide-2023?rvi=1). The description states “a comprehensive catalog capturing seismic activity from January 1, 2023, to December 31, 2023. This dataset provides a detailed record of earthquakes globally, including crucial information such as date and time, geographic coordinates, depth, magnitude, and the affected region’s land type and country.” We have many variables to consider which allows us to obtain detailed information on specific earthquakes and their frequency. 
 
 ```{r}
 earthquake <- read.csv('/Users/alban/Downloads/earthquake data.csv')
+```
+
+```{r}
+#| results: asis
+#| echo: false
+rmarkdown::paged_table(earthquake)
 ```
 
 # Summary Statistics
