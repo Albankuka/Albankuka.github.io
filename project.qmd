@@ -47,11 +47,15 @@ theme_set(theme_ipsum()+
 
 # Introduction
 
-About this project :clap:
+About this project :clap: - My teammates and I will be observing worldwide earthquake occurrences data that took place in 2023. Analyzing this data will allow us to determine how Depth varies by Magnitude and how factors such as Location and time affect the destructiveness of these earthquakes.
 
 ```{r}
 earthquake <- read.csv('/Users/alban/Downloads/earthquake data.csv')
 ```
+
+## Significance
+
+Analyzing this data will help us determine the countries across the world that encounter the most devastating earthquakes. This can help and raise awareness for natural disasters in these countries and contribute to safety protocols for when earthquakes occur. The more we can prove a country is suffering because of natural disasters the more we can advocate for advanced infrastructure designed for safety during these occurrences. 
 
 
 # Data
@@ -87,6 +91,11 @@ ggplot(data = mpg) +
   geom_boxplot(aes(x = class, y = hwy, fill = class),
                show.legend = F) +
   labs(x = "Class", y = "Highway\nMPG") 
+```
+
+## people 
+```{r}
+
 ```
 
 
