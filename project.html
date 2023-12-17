@@ -173,6 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#which-month-did-the-most-earthquake-prone-countries-experience-earthquakes" id="toc-which-month-did-the-most-earthquake-prone-countries-experience-earthquakes" class="nav-link" data-scroll-target="#which-month-did-the-most-earthquake-prone-countries-experience-earthquakes"><span class="header-section-number">5.1</span> which month did the most earthquake prone countries experience earthquakes?</a></li>
   <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations"><span class="header-section-number">5.2</span> Visualizations</a></li>
+  <li><a href="#quick-visualization-per-each-month" id="toc-quick-visualization-per-each-month" class="nav-link" data-scroll-target="#quick-visualization-per-each-month"><span class="header-section-number">5.3</span> Quick Visualization per each month</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -539,6 +540,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="visualizations" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="visualizations"><span class="header-section-number">5.2</span> Visualizations</h2>
+<p>A simple bar graph to demonstrate the variation of months that have been earthquake prone within the top countries:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dense,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>( <span class="at">x =</span> Country,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> Month)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>We can see that Turkey has earthquakes within every single month provided except November in the data set leaving the other countries to only face earthquakes within one month of the year.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dense) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> Country, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> <span class="fu">stat</span>(prop), <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Month <span class="sc">~</span>.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Similar to the previous visualization we can see the month that occurred for each country, some countries showing no month because they did not experience an earthquake during that particular month.</p>
+</section>
+<section id="quick-visualization-per-each-month" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="quick-visualization-per-each-month"><span class="header-section-number">5.3</span> Quick Visualization per each month</h2>
+<p>This displays the occurrences of specific level magnitudes within each of the months of the data. July has the highest count of over 2000 with a level 2 magnitude.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake, <span class="fu">aes</span>(<span class="at">x =</span> Magnitude)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Month, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Magnitude by month"</span>, <span class="at">x =</span> <span class="st">"Magnitude"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
 
 
 </section>

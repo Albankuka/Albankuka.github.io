@@ -276,6 +276,43 @@ rmarkdown::paged_table(dense)
 ```
 
 ## Visualizations
+A simple bar graph to demonstrate the variation of months that have been earthquake prone within the top countries:
+
+```{r}
+ggplot(dense,
+       aes( x = Country,
+           fill = Month)) +
+  geom_bar(show.legend = T)
+```
+
+We can see that Turkey has earthquakes within every single month provided except November in the data set leaving the other countries to only face earthquakes within one month of the year. 
+
+
+```{r}
+ggplot(dense) +
+  geom_bar(aes(y = Country, 
+               x = stat(prop), group = 1)) +
+  facet_grid(Month ~.)
+```
+
+Similar to the previous visualization we can see the month that occurred for each country, some countries showing no month because they did not experience an earthquake during that particular month.
+
+
+## Quick Visualization per each month
+This displays the occurrences of specific level magnitudes within each of the months of the data. July has the highest count of over 2000 with a level 2 magnitude. 
+
+```{r}
+ggplot(earthquake, aes(x = Magnitude)) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black", alpha = 0.7) +
+  facet_wrap(~Month, scales = "free_y") +
+  labs(title = "Histogram of Magnitude by month", x = "Magnitude", y = "Count")
+```
+
+
+
+
+
+
 
 
 
