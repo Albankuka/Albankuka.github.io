@@ -162,6 +162,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#location" id="toc-location" class="nav-link" data-scroll-target="#location"><span class="header-section-number">3</span> Location</a>
   <ul class="collapse">
   <li><a href="#top-10" id="toc-top-10" class="nav-link" data-scroll-target="#top-10"><span class="header-section-number">3.1</span> Top 10</a></li>
+  <li><a href="#countries" id="toc-countries" class="nav-link" data-scroll-target="#countries"><span class="header-section-number">3.2</span> Countries</a></li>
+  </ul></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">4</span> Correlation</a>
+  <ul class="collapse">
+  <li><a href="#line-and-scatter-plots" id="toc-line-and-scatter-plots" class="nav-link" data-scroll-target="#line-and-scatter-plots"><span class="header-section-number">4.1</span> Line and scatter plots</a></li>
+  <li><a href="#hex-and-violin-plots" id="toc-hex-and-violin-plots" class="nav-link" data-scroll-target="#hex-and-violin-plots"><span class="header-section-number">4.2</span> Hex and Violin plots</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -416,6 +422,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 </div>
 </div>
+</section>
+<section id="countries" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="countries"><span class="header-section-number">3.2</span> Countries</h2>
+<p>we can see that Turkey gets hit with 3300 earthquakes in one year which is double than the second most per year in the islands of Hawaii.</p>
+<p>In the United States, Texas gets hit with the most earthquakes out of all the states with 1171 earthquakes in 2023 alone</p>
+</section>
+</section>
+<section id="correlation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Correlation</h1>
+<p>In this section we will be focusing on the correlation between <code>Magnitude</code> and <code>Depth</code> to find how many kilometers underground does an earthquake occur at for each magnitude.</p>
+<section id="line-and-scatter-plots" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="line-and-scatter-plots"><span class="header-section-number">4.1</span> Line and scatter plots</h2>
+<p>Using a line plot to measure the two variables. But due to how vast this earthquake data is, a lot of lines appear to be densely compact. This does not affect our data visualization</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake, <span class="fu">aes</span>(<span class="at">x =</span> Magnitude, <span class="at">y =</span> Depth )) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relationship between Magnitude and Depth"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Magnitude"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Depth"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>From this we notice that level 3 magnitude earthquakes seem to have the deepest occurrence with about 700 kilometers underground. As we noticed previously level 2 magnitude earthquakes occur the most but do not have the deepest rumble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Magnitude, <span class="at">y =</span> Depth)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">06</span>, <span class="at">size =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">color =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>In this visualization we have taken all the data points and inserted them into a scatter plot and we can see how dense the 200 depth and below section really is. Our lines tell us this data is skewed to the left and we can also see a steady incline in depth throughout each magnitude of earthquake.</p>
+</section>
+<section id="hex-and-violin-plots" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="hex-and-violin-plots"><span class="header-section-number">4.2</span> Hex and Violin plots</h2>
+<p>The Hexplot closely resembles our scatter plot as we can see the density of these earthquakes that also vary by depth.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Magnitude, <span class="at">y =</span> Depth)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">color =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Since it’s the same data we have the same skewness.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">x =</span> Magnitude, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="fu">log</span>(Depth), <span class="at">alpha =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>What we can take away from all of this is that there were not many extremely high magnitude earthquakes, although there were some in reaching the 7’s which prove to be quite catastrophic.</p>
 
 
 </section>

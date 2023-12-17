@@ -169,11 +169,59 @@ quaked <- earthquake %>%
 rmarkdown::paged_table(quaked)
 ```
 
+## Countries
+we can see that Turkey gets hit with 3300 earthquakes in one year which is double than the second most per year in the islands of Hawaii. 
+
+In the United States, Texas gets hit with the most earthquakes out of all the states with 1171 earthquakes in 2023 alone 
 
 
+# Correlation 
+In this section we will be focusing on the correlation between `Magnitude` and `Depth` to find how many kilometers underground does an earthquake occur at for each magnitude.
+
+## Line and scatter plots
+Using a line plot to measure the two variables. But due to how vast this earthquake data is, a lot of lines appear to be densely compact. This does not affect our data visualization 
+
+```{r}
+ggplot(earthquake, aes(x = Magnitude, y = Depth )) +
+  geom_line() +
+  labs(title = "Relationship between Magnitude and Depth",
+       x = "Magnitude",
+       y = "Depth")
+```
+
+From this we notice that level 3 magnitude earthquakes seem to have the deepest occurrence with about 700 kilometers underground. As we noticed previously level 2 magnitude earthquakes occur the most but do not have the deepest rumble. 
 
 
+```{r}
+ggplot(earthquake,
+       aes(x = Magnitude, y = Depth)) +
+  geom_point(alpha = .06, size = .75) +
+  geom_smooth() +
+  geom_smooth(method = lm, color = 'red')
+```
+
+In this visualization we have taken all the data points and inserted them into a scatter plot and we can see how dense the 200 depth and below section really is. Our lines tell us this data is skewed to the left and we can also see a steady incline in depth throughout each magnitude of earthquake. 
 
 
+## Hex and Violin plots
+The Hexplot closely resembles our scatter plot as we can see the density of these earthquakes that also vary by depth.
 
+```{r}
+ggplot(earthquake,
+       aes(x = Magnitude, y = Depth)) +
+  geom_hex() +
+  geom_smooth() +
+  geom_smooth(method = lm, color = 'red')
+```
+
+Since it's the same data we have the same skewness. 
+
+
+```{r}
+ggplot(earthquake) +
+  geom_violin(aes(x = Magnitude, 
+               y = log(Depth), alpha = 0.5))
+```
+
+What we can take away from all of this is that there were not many extremely high magnitude earthquakes, although there were some in reaching the 7's which prove to be quite catastrophic. 
 

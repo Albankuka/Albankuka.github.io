@@ -173,5 +173,26 @@
     "title": "DANL Project",
     "section": "3.1 Top 10",
     "text": "3.1 Top 10\nWhat are the top ten countries that encounter the most earthquakes in 2023?\n\nquaked &lt;- earthquake %&gt;% \n  group_by(Country , Lands) %&gt;% \n  summarize(count =n()) %&gt;% \n  arrange(desc(count)) %&gt;% \n  filter(row_number() &lt;=10) %&gt;% \n  head(quaked, n = 10)"
+  },
+  {
+    "objectID": "project.html#countries",
+    "href": "project.html#countries",
+    "title": "DANL Project",
+    "section": "3.2 Countries",
+    "text": "3.2 Countries\nwe can see that Turkey gets hit with 3300 earthquakes in one year which is double than the second most per year in the islands of Hawaii.\nIn the United States, Texas gets hit with the most earthquakes out of all the states with 1171 earthquakes in 2023 alone"
+  },
+  {
+    "objectID": "project.html#line-and-scatter-plots",
+    "href": "project.html#line-and-scatter-plots",
+    "title": "DANL Project",
+    "section": "4.1 Line and scatter plots",
+    "text": "4.1 Line and scatter plots\nUsing a line plot to measure the two variables. But due to how vast this earthquake data is, a lot of lines appear to be densely compact. This does not affect our data visualization\n\nggplot(earthquake, aes(x = Magnitude, y = Depth )) +\n  geom_line() +\n  labs(title = \"Relationship between Magnitude and Depth\",\n       x = \"Magnitude\",\n       y = \"Depth\")\n\n\n\n\nFrom this we notice that level 3 magnitude earthquakes seem to have the deepest occurrence with about 700 kilometers underground. As we noticed previously level 2 magnitude earthquakes occur the most but do not have the deepest rumble.\n\nggplot(earthquake,\n       aes(x = Magnitude, y = Depth)) +\n  geom_point(alpha = .06, size = .75) +\n  geom_smooth() +\n  geom_smooth(method = lm, color = 'red')\n\n\n\n\nIn this visualization we have taken all the data points and inserted them into a scatter plot and we can see how dense the 200 depth and below section really is. Our lines tell us this data is skewed to the left and we can also see a steady incline in depth throughout each magnitude of earthquake."
+  },
+  {
+    "objectID": "project.html#hex-and-violin-plots",
+    "href": "project.html#hex-and-violin-plots",
+    "title": "DANL Project",
+    "section": "4.2 Hex and Violin plots",
+    "text": "4.2 Hex and Violin plots\nThe Hexplot closely resembles our scatter plot as we can see the density of these earthquakes that also vary by depth.\n\nggplot(earthquake,\n       aes(x = Magnitude, y = Depth)) +\n  geom_hex() +\n  geom_smooth() +\n  geom_smooth(method = lm, color = 'red')\n\n\n\n\nSince it’s the same data we have the same skewness.\n\nggplot(earthquake) +\n  geom_violin(aes(x = Magnitude, \n               y = log(Depth), alpha = 0.5))\n\n\n\n\nWhat we can take away from all of this is that there were not many extremely high magnitude earthquakes, although there were some in reaching the 7’s which prove to be quite catastrophic."
   }
 ]
