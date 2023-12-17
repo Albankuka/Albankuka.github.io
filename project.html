@@ -169,6 +169,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#line-and-scatter-plots" id="toc-line-and-scatter-plots" class="nav-link" data-scroll-target="#line-and-scatter-plots"><span class="header-section-number">4.1</span> Line and scatter plots</a></li>
   <li><a href="#hex-and-violin-plots" id="toc-hex-and-violin-plots" class="nav-link" data-scroll-target="#hex-and-violin-plots"><span class="header-section-number">4.2</span> Hex and Violin plots</a></li>
   </ul></li>
+  <li><a href="#earthquake-month" id="toc-earthquake-month" class="nav-link" data-scroll-target="#earthquake-month"><span class="header-section-number">5</span> Earthquake Month</a>
+  <ul class="collapse">
+  <li><a href="#which-month-did-the-most-earthquake-prone-countries-experience-earthquakes" id="toc-which-month-did-the-most-earthquake-prone-countries-experience-earthquakes" class="nav-link" data-scroll-target="#which-month-did-the-most-earthquake-prone-countries-experience-earthquakes"><span class="header-section-number">5.1</span> which month did the most earthquake prone countries experience earthquakes?</a></li>
+  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations"><span class="header-section-number">5.2</span> Visualizations</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -481,6 +486,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>What we can take away from all of this is that there were not many extremely high magnitude earthquakes, although there were some in reaching the 7’s which prove to be quite catastrophic.</p>
+</section>
+</section>
+<section id="earthquake-month" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Earthquake Month</h1>
+<p>In this session of our project we decided to break each month up and find out which month had the most amount of earthquakes. this can help us in the future so we can keep a close eye on monthly trends.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(earthquake[,<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">1</span><span class="sc">:</span><span class="dv">6055</span>] <span class="ot">&lt;-</span> <span class="st">"NOVEMBER"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">6056</span><span class="sc">:</span><span class="dv">14543</span>] <span class="ot">&lt;-</span> <span class="st">"OCTOBER"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">14544</span><span class="sc">:</span><span class="dv">23404</span>] <span class="ot">&lt;-</span> <span class="st">"SEPTEMBER"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">23405</span><span class="sc">:</span><span class="dv">31631</span>] <span class="ot">&lt;-</span> <span class="st">"AUGUST"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">31632</span><span class="sc">:</span><span class="dv">40673</span>] <span class="ot">&lt;-</span> <span class="st">"JULY"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">40674</span><span class="sc">:</span><span class="dv">48647</span>] <span class="ot">&lt;-</span> <span class="st">"JUNE"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Month[<span class="dv">48648</span><span class="sc">:</span><span class="dv">53539</span>] <span class="ot">&lt;-</span> <span class="st">"MAY"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>densemonth <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The month of July has the most earthquakes throughout this data set’s months of May through November. Within these 7 months each month seems to have a very similar amount of occurrences other than November and May which have less than 8000.</p>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Month"],"name":[1],"type":["chr"],"align":["left"]},{"label":["count"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"JULY","2":"9042"},{"1":"SEPTEMBER","2":"8861"},{"1":"OCTOBER","2":"8488"},{"1":"AUGUST","2":"8227"},{"1":"JUNE","2":"7974"},{"1":"NOVEMBER","2":"6055"},{"1":"MAY","2":"4892"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<section id="which-month-did-the-most-earthquake-prone-countries-experience-earthquakes" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="which-month-did-the-most-earthquake-prone-countries-experience-earthquakes"><span class="header-section-number">5.1</span> which month did the most earthquake prone countries experience earthquakes?</h2>
+<p>This section shows the specific month that these countries experienced the most earthquakes from May-November 2023.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dense <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month,Country,Lands) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">7</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(dense, <span class="at">n=</span><span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the month of June alone Turkey was hit with 701 earthquakes which is shocking because Turkey makes an appearance multiple times on this list for multiple different months clearly showing that Turkey suffers the most amount of earthquakes.</p>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Month"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Lands"],"name":[3],"type":["chr"],"align":["left"]},{"label":["count"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"JUNE","2":"TURKEY","3":"CENTRAL","4":"701"},{"1":"SEPTEMBER","2":"MOROCCO","3":"MOROCCO","4":"613"},{"1":"MAY","2":"TURKEY","3":"CENTRAL","4":"608"},{"1":"JULY","2":"TURKEY","3":"CENTRAL","4":"527"},{"1":"AUGUST","2":"TURKEY","3":"CENTRAL","4":"526"},{"1":"NOVEMBER","2":"REGION","3":"ICELAND","4":"438"},{"1":"OCTOBER","2":"TURKEY","3":"CENTRAL","4":"379"},{"1":"OCTOBER","2":"HAWAII","3":"ISLAND, OF, HAWAII,","4":"363"},{"1":"SEPTEMBER","2":"TURKEY","3":"CENTRAL","4":"348"},{"1":"JUNE","2":"TURKEY","3":"EASTERN","4":"313"},{"1":"JULY","2":"PORTUGAL","3":"AZORES, ISLANDS,","4":"297"},{"1":"AUGUST","2":"HAWAII","3":"ISLAND, OF, HAWAII,","4":"293"},{"1":"JULY","2":"SALVADOR","3":"OFFSHORE, EL","4":"293"},{"1":"AUGUST","2":"TURKEY","3":"EASTERN","4":"289"},{"1":"SEPTEMBER","2":"GREECE","3":"GREECE","4":"244"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</section>
+<section id="visualizations" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="visualizations"><span class="header-section-number">5.2</span> Visualizations</h2>
 
 
 </section>

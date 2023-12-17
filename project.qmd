@@ -225,3 +225,57 @@ ggplot(earthquake) +
 
 What we can take away from all of this is that there were not many extremely high magnitude earthquakes, although there were some in reaching the 7's which prove to be quite catastrophic. 
 
+
+# Earthquake Month
+In this session of our project we decided to break each month up and find out which month had the most amount of earthquakes. this can help us in the future so we can keep a close eye on monthly trends. 
+
+```{r}
+earthquake$Month <- rowSums(earthquake[,4:5])
+earthquake$Month[1:6055] <- "NOVEMBER"
+earthquake$Month[6056:14543] <- "OCTOBER"
+earthquake$Month[14544:23404] <- "SEPTEMBER"
+earthquake$Month[23405:31631] <- "AUGUST"
+earthquake$Month[31632:40673] <- "JULY"
+earthquake$Month[40674:48647] <- "JUNE"
+earthquake$Month[48648:53539] <- "MAY"
+
+densemonth <- earthquake %>% 
+  group_by(Month) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=7)
+```
+
+The month of July has the most earthquakes throughout this data set's months of May through November. Within these 7 months each month seems to have a very similar amount of occurrences other than November and May which have less than 8000.
+
+```{r}
+#| results: asis
+#| echo: false
+rmarkdown::paged_table(densemonth)
+```
+
+
+## which month did the most earthquake prone countries experience earthquakes?
+This section shows the specific month that these countries experienced the most earthquakes from May-November 2023.
+
+```{r}
+dense <- earthquake %>% 
+  group_by(Month,Country,Lands) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=7) %>% 
+  head(dense, n=15)
+```
+
+In the month of June alone Turkey was hit with 701 earthquakes which is shocking because Turkey makes an appearance multiple times on this list for multiple different months clearly showing that Turkey suffers the most amount of earthquakes.
+
+```{r}
+#| results: asis
+#| echo: false
+rmarkdown::paged_table(dense)
+```
+
+## Visualizations
+
+
+

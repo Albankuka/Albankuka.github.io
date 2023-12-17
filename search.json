@@ -194,5 +194,19 @@
     "title": "DANL Project",
     "section": "4.2 Hex and Violin plots",
     "text": "4.2 Hex and Violin plots\nThe Hexplot closely resembles our scatter plot as we can see the density of these earthquakes that also vary by depth.\n\nggplot(earthquake,\n       aes(x = Magnitude, y = Depth)) +\n  geom_hex() +\n  geom_smooth() +\n  geom_smooth(method = lm, color = 'red')\n\n\n\n\nSince it’s the same data we have the same skewness.\n\nggplot(earthquake) +\n  geom_violin(aes(x = Magnitude, \n               y = log(Depth), alpha = 0.5))\n\n\n\n\nWhat we can take away from all of this is that there were not many extremely high magnitude earthquakes, although there were some in reaching the 7’s which prove to be quite catastrophic."
+  },
+  {
+    "objectID": "project.html#which-month-did-the-most-earthquake-prone-countries-experience-earthquakes",
+    "href": "project.html#which-month-did-the-most-earthquake-prone-countries-experience-earthquakes",
+    "title": "DANL Project",
+    "section": "5.1 which month did the most earthquake prone countries experience earthquakes?",
+    "text": "5.1 which month did the most earthquake prone countries experience earthquakes?\nThis section shows the specific month that these countries experienced the most earthquakes from May-November 2023.\n\ndense &lt;- earthquake %&gt;% \n  group_by(Month,Country,Lands) %&gt;% \n  summarize(count =n()) %&gt;% \n  arrange(desc(count)) %&gt;% \n  filter(row_number() &lt;=7) %&gt;% \n  head(dense, n=15)\n\nIn the month of June alone Turkey was hit with 701 earthquakes which is shocking because Turkey makes an appearance multiple times on this list for multiple different months clearly showing that Turkey suffers the most amount of earthquakes."
+  },
+  {
+    "objectID": "project.html#visualizations",
+    "href": "project.html#visualizations",
+    "title": "DANL Project",
+    "section": "5.2 Visualizations",
+    "text": "5.2 Visualizations"
   }
 ]
