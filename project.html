@@ -157,8 +157,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics"><span class="header-section-number">2</span> Summary Statistics</a>
   <ul class="collapse">
   <li><a href="#magnitude-statistics" id="toc-magnitude-statistics" class="nav-link" data-scroll-target="#magnitude-statistics"><span class="header-section-number">2.1</span> Magnitude Statistics</a></li>
+  <li><a href="#frequency-data" id="toc-frequency-data" class="nav-link" data-scroll-target="#frequency-data"><span class="header-section-number">2.2</span> Frequency Data</a></li>
   </ul></li>
-  <li><a href="#frequency-data" id="toc-frequency-data" class="nav-link" data-scroll-target="#frequency-data"><span class="header-section-number">3</span> Frequency Data</a></li>
+  <li><a href="#location" id="toc-location" class="nav-link" data-scroll-target="#location"><span class="header-section-number">3</span> Location</a>
+  <ul class="collapse">
+  <li><a href="#top-10" id="toc-top-10" class="nav-link" data-scroll-target="#top-10"><span class="header-section-number">3.1</span> Top 10</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -360,9 +364,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-</section>
-<section id="frequency-data" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Frequency Data</h1>
+<section id="frequency-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="frequency-data"><span class="header-section-number">2.2</span> Frequency Data</h2>
 <p>The following freqpoly and histograms show how the frequency/occurrences of (<code>Magnitude</code>) varies by the (<code>Depth</code>) of the earthquake. We can determine the correlation between these two variables to find relationships on the strengths of earthquakes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake, <span class="fu">aes</span>(<span class="at">x =</span> Magnitude)) <span class="sc">+</span></span>
@@ -380,8 +383,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>From this histogram we can see that the depth of around 2.3 kilometers was the depth that occurred the most with a frequency of 8000 so mainly earthquakes in general have a depth of 1.7 to 2.3 kilometers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> Magnitude, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> <span class="fu">stat</span>(prop), <span class="at">group =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+<p>Since we are viewing the proportions of magnitude in this visualization we can note that 6% of our data is from a level 2 magnitude earthquake measured on the richter scale, 4% of the data relates to extremely high or low levels of magnitude.</p>
+</section>
+</section>
+<section id="location" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Location</h1>
+<p>This section of the project focuses on the location of these earthquakes and where in the world these earthquakes happen the most. The location is based on the variables <code>Country</code> and <code>Lands</code> for the year of 2023.</p>
+<section id="top-10" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="top-10"><span class="header-section-number">3.1</span> Top 10</h2>
+<p>What are the top ten countries that encounter the most earthquakes in 2023?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>quaked <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country , Lands) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(quaked, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Lands"],"name":[2],"type":["chr"],"align":["left"]},{"label":["count"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"TURKEY","2":"CENTRAL","3":"3300"},{"1":"HAWAII","2":"ISLAND, OF, HAWAII,","3":"1661"},{"1":"TURKEY","2":"EASTERN","3":"1486"},{"1":"TEXAS","2":"WESTERN","3":"1171"},{"1":"GREECE","2":"GREECE","3":"1105"},{"1":"MEXICO","2":"OAXACA,","3":"1010"},{"1":"CHILE","2":"ANTOFAGASTA,","3":"935"},{"1":"TURKEY","2":"WESTERN","3":"852"},{"1":"REGION","2":"PUERTO, RICO","3":"831"},{"1":"REGION","2":"ICELAND","3":"773"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

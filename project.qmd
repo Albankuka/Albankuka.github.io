@@ -118,7 +118,7 @@ rmarkdown::paged_table(summagnitude)
 ```
 
 
-# Frequency Data 
+## Frequency Data 
 The following freqpoly and histograms show how the frequency/occurrences of (`Magnitude`) varies by the (`Depth`) of the earthquake. We can determine the correlation between these two variables to find relationships on the strengths of earthquakes.
 
 ```{r}
@@ -135,6 +135,44 @@ ggplot(earthquake, aes(x = log(Depth))) +
 ```
 
 From this histogram we can see that the depth of around 2.3 kilometers was the depth that occurred the most with a frequency of 8000 so mainly earthquakes in general have a depth of 1.7 to 2.3 kilometers.
+
+
+```{r}
+ggplot(earthquake) +
+  geom_bar(aes(y = Magnitude, 
+               x = stat(prop), group = 1)) 
+```
+
+Since we are viewing the proportions of magnitude in this visualization we can note that 6% of our data is from a level 2 magnitude earthquake measured on the richter scale, 4% of the data relates to extremely high or low levels of magnitude.
+
+
+# Location 
+
+This section of the project focuses on the location of these earthquakes and where in the world these earthquakes happen the most. The location is based on the variables `Country` and `Lands` for the year of 2023.
+
+## Top 10
+
+What are the top ten countries that encounter the most earthquakes in 2023? 
+
+```{r}
+quaked <- earthquake %>% 
+  group_by(Country , Lands) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=10) %>% 
+  head(quaked, n = 10)
+```
+
+```{r}
+#| results: asis
+#| echo: false
+rmarkdown::paged_table(quaked)
+```
+
+
+
+
+
 
 
 

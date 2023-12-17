@@ -159,5 +159,19 @@
     "title": "DANL Project",
     "section": "2.1 Magnitude Statistics",
     "text": "2.1 Magnitude Statistics\nFor a more detailed summary for Magnitude I transformed the data to return all summary statistics for only magnitude. This will allow us to see worldwide averages of the severity of earthquakes.\n\nsummagnitude &lt;- earthquake %&gt;% \n  summarize(\n    mean_magnitude = mean(Magnitude, na.rm = T), \n    sd_magnitude = sd(Magnitude),\n    q1_magnitude = quantile(Magnitude, probs = .25, na.rm = T),\n    median_magnitude = median(Magnitude),\n    q3_magnitude = quantile(Magnitude, probs = .75, na.rm =  T),\n    min_magnitude = min(Magnitude, na.rm = T),\n    max_magnitude = max(Magnitude, na.rm = T)\n  )"
+  },
+  {
+    "objectID": "project.html#frequency-data",
+    "href": "project.html#frequency-data",
+    "title": "DANL Project",
+    "section": "2.2 Frequency Data",
+    "text": "2.2 Frequency Data\nThe following freqpoly and histograms show how the frequency/occurrences of (Magnitude) varies by the (Depth) of the earthquake. We can determine the correlation between these two variables to find relationships on the strengths of earthquakes.\n\nggplot(earthquake, aes(x = Magnitude)) +\n  geom_freqpoly(bins = 100)\n\n\n\n\nFrom this freqpoly we can see that the level 2 magnitude earthquakes seem to be the most common with almost 4000 occurrences worldwide. the density of this plot shows us that between level 2 and 6, majority of earthquakes rumble at these magnitudes.\n\nggplot(earthquake, aes(x = log(Depth))) +\n  geom_histogram(bins = 50)\n\n\n\n\nFrom this histogram we can see that the depth of around 2.3 kilometers was the depth that occurred the most with a frequency of 8000 so mainly earthquakes in general have a depth of 1.7 to 2.3 kilometers.\n\nggplot(earthquake) +\n  geom_bar(aes(y = Magnitude, \n               x = stat(prop), group = 1)) \n\n\n\n\nSince we are viewing the proportions of magnitude in this visualization we can note that 6% of our data is from a level 2 magnitude earthquake measured on the richter scale, 4% of the data relates to extremely high or low levels of magnitude."
+  },
+  {
+    "objectID": "project.html#top-10",
+    "href": "project.html#top-10",
+    "title": "DANL Project",
+    "section": "3.1 Top 10",
+    "text": "3.1 Top 10\nWhat are the top ten countries that encounter the most earthquakes in 2023?\n\nquaked &lt;- earthquake %&gt;% \n  group_by(Country , Lands) %&gt;% \n  summarize(count =n()) %&gt;% \n  arrange(desc(count)) %&gt;% \n  filter(row_number() &lt;=10) %&gt;% \n  head(quaked, n = 10)"
   }
 ]
