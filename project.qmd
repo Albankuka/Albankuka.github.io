@@ -309,9 +309,44 @@ ggplot(earthquake, aes(x = Magnitude)) +
 ```
 
 
+# Earthquake Season 
+In this section we determine which season is earthquake season. By dividing the months into seasons we can see how many earthquakes occurred during each season:
+
+```{r}
+earthquake$Season <- rowSums(earthquake[,4:5])
+earthquake$Season[48648:53539] <- "SPRING"
+earthquake$Season[23405:48647] <- "SUMMER"
+earthquake$Season[1:23404] <- "FALL"
+
+denseseason <- earthquake %>% 
+  group_by(Season) %>% 
+  summarize(count =n()) %>% 
+  arrange(desc(count)) %>% 
+  filter(row_number() <=3)
+```
+
+Summer and Fall are the most popular seasons for earthquakes with over 23 thousand earthquakes occurring during those seasons
+
+```{r}
+#| results: asis
+#| echo: false
+rmarkdown::paged_table(denseseason)
+```
 
 
+## Visualization
+This visualization displays all the months within the season that experience the most earthquakes provided by this data set.
 
+```{r}
+ggplot(earthquake) +
+  geom_bar(aes(x = Month, y = stat(count),
+               group = 1)) +
+  facet_wrap(Season ~ . , ncol = 5)
+```
+
+
+# Conclusion
+It is truly unthinkable of how many earthquakes occur in Turkey every month and every day little or small. Hopefully this data analyzation was able to prove the severity and the frequency of these earthquakes in order to share the perspective of what is really occurring monthly in Turkey. After analyzing this data we can see the clear cut correlation between Magnitude and Depth which allows us to determine how destructive each earthquake really is. all in all, this data should advocate for more safety protocols when it comes to high frequency earthquake countries and hopefully this moves us in the direction of safer infrastructure within these densely populated countries.  
 
 
 

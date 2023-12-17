@@ -215,5 +215,12 @@
     "title": "DANL Project",
     "section": "5.3 Quick Visualization per each month",
     "text": "5.3 Quick Visualization per each month\nThis displays the occurrences of specific level magnitudes within each of the months of the data. July has the highest count of over 2000 with a level 2 magnitude.\n\nggplot(earthquake, aes(x = Magnitude)) +\n  geom_histogram(binwidth = 0.5, fill = \"blue\", color = \"black\", alpha = 0.7) +\n  facet_wrap(~Month, scales = \"free_y\") +\n  labs(title = \"Histogram of Magnitude by month\", x = \"Magnitude\", y = \"Count\")"
+  },
+  {
+    "objectID": "project.html#visualization",
+    "href": "project.html#visualization",
+    "title": "DANL Project",
+    "section": "6.1 Visualization",
+    "text": "6.1 Visualization\nThis visualization displays all the months within the season that experience the most earthquakes provided by this data set.\n\nggplot(earthquake) +\n  geom_bar(aes(x = Month, y = stat(count),\n               group = 1)) +\n  facet_wrap(Season ~ . , ncol = 5)"
   }
 ]

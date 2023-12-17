@@ -175,6 +175,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations"><span class="header-section-number">5.2</span> Visualizations</a></li>
   <li><a href="#quick-visualization-per-each-month" id="toc-quick-visualization-per-each-month" class="nav-link" data-scroll-target="#quick-visualization-per-each-month"><span class="header-section-number">5.3</span> Quick Visualization per each month</a></li>
   </ul></li>
+  <li><a href="#earthquake-season" id="toc-earthquake-season" class="nav-link" data-scroll-target="#earthquake-season"><span class="header-section-number">6</span> Earthquake Season</a>
+  <ul class="collapse">
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">6.1</span> Visualization</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">7</span> Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -574,9 +579,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="project_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="864"></p>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="earthquake-season" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Earthquake Season</h1>
+<p>In this section we determine which season is earthquake season. By dividing the months into seasons we can see how many earthquakes occurred during each season:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Season <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(earthquake[,<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Season[<span class="dv">48648</span><span class="sc">:</span><span class="dv">53539</span>] <span class="ot">&lt;-</span> <span class="st">"SPRING"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Season[<span class="dv">23405</span><span class="sc">:</span><span class="dv">48647</span>] <span class="ot">&lt;-</span> <span class="st">"SUMMER"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>earthquake<span class="sc">$</span>Season[<span class="dv">1</span><span class="sc">:</span><span class="dv">23404</span>] <span class="ot">&lt;-</span> <span class="st">"FALL"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>denseseason <span class="ot">&lt;-</span> earthquake <span class="sc">%&gt;%</span> </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Season) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Summer and Fall are the most popular seasons for earthquakes with over 23 thousand earthquakes occurring during those seasons</p>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Season"],"name":[1],"type":["chr"],"align":["left"]},{"label":["count"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"SUMMER","2":"25243"},{"1":"FALL","2":"23404"},{"1":"SPRING","2":"4892"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<section id="visualization" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="visualization"><span class="header-section-number">6.1</span> Visualization</h2>
+<p>This visualization displays all the months within the season that experience the most earthquakes provided by this data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(earthquake) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Month, <span class="at">y =</span> <span class="fu">stat</span>(count),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Season <span class="sc">~</span> . , <span class="at">ncol =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="project_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="864"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Conclusion</h1>
+<p>It is truly unthinkable of how many earthquakes occur in Turkey every month and every day little or small. Hopefully this data analyzation was able to prove the severity and the frequency of these earthquakes in order to share the perspective of what is really occurring monthly in Turkey. After analyzing this data we can see the clear cut correlation between Magnitude and Depth which allows us to determine how destructive each earthquake really is. all in all, this data should advocate for more safety protocols when it comes to high frequency earthquake countries and hopefully this moves us in the direction of safer infrastructure within these densely populated countries.</p>
+
+
 </section>
 
 </main> <!-- /main -->
